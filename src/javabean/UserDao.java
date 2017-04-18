@@ -1,4 +1,5 @@
 package javabean;
+import java.io.IOException;
 import java.sql.ResultSet;
 
 /**
@@ -33,27 +34,33 @@ public class UserDao extends Connect {
     }
 
 
-    public User testUser(String email, String password) throws Exception {
-        this.startConnect();
-        User user=null;
-        ResultSet rs = stmt.executeQuery("select * from p_user where email=" + "\'" + email + "\'");
-        //ResultSet rs = this.stmt.executeQuery("SELECT * FROM P_USER ");
-        if (rs.next()) {
-            if (rs.getString(2).equals(password)) {
-                user= new User(rs.getString(1), rs.getString(2), rs.getString(3));
+    public User testUser(String email, String password){
+        try {
+            User user=null;
+            this.startConnect();
+            ResultSet rs = stmt.executeQuery("select * from p_user where email=" + "\'" + email + "\'");
+            //ResultSet rs = this.stmt.executeQuery("SELECT * FROM P_USER ");
+            if (rs.next()) {
+                if (rs.getString(2).equals(password)) {
+                    user= new User(rs.getString(1), rs.getString(2), rs.getString(3));
+                }
             }
+            this.endConnect();
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        this.endConnect();
-        return user;
 
+
+        return null;
     }
 
-
+/*
     public static void main(String[] args) throws Exception {
 
         UserDao ud = new UserDao();
         ud.resigtrate(new User("wo", "123123", "asdf@fddsa"));
-    }
+    }*/
 /*    public static void main(String[] args) throws Exception {
         UserDao d = new UserDao();
         User p = d.testUser("jaja@ufl.edu", "123456");

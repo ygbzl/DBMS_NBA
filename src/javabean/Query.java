@@ -8,6 +8,11 @@ import java.sql.ResultSet;
 public class Query extends Connect{
 
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public String[] QPlayer_Score() throws Exception {
         this.startConnect();
         ResultSet rs = stmt.executeQuery("select PLAYER_NAME, P/2, TEAM_ABBREVIATION from (\n" +
@@ -18,10 +23,12 @@ public class Query extends Connect{
                 "order by sum(MATCH_PLAYER_STATS.PTS) desc)\n" +
                 "where p is not null and rownum <= 5");
         String[] res = new String[3];
-
+        rs.next();
+        res[0] = rs.getString(1);
+        res[1] = rs.getInt(2) + "";
+        res[2] = rs.getString(3);
 
         return res;
-
     }
 
 }
