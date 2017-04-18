@@ -29,7 +29,7 @@ public class UserDao extends Connect {
         //System.out.println(("insert into p_user values (\'" + username + "\',\'" + password + "\',\'" + email + "\');"));
         stmt.executeUpdate("insert into p_user values (\'" + username + "\',\'" + password + "\',\'" + email + "\')");
         //stmt.executeUpdate("insert into p_user values ('wdo','1231223','asdf@fdsa')");
-
+        this.endConnect();
     }
 
 
