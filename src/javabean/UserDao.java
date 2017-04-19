@@ -43,9 +43,11 @@ public class UserDao extends Connect {
             if (rs.next()) {
                 if (rs.getString(2).equals(password)) {
                     user= new User(rs.getString(1), rs.getString(2), rs.getString(3));
+                    //System.out.println("true");
                 }
             }
             this.endConnect();
+
             return user;
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,11 +57,15 @@ public class UserDao extends Connect {
         return null;
     }
 
-/*
-    public static void main(String[] args) throws Exception {
+  /*  public static void main(String[] args) throws Exception {
 
         UserDao ud = new UserDao();
-        ud.resigtrate(new User("wo", "123123", "asdf@fddsa"));
+        User s= ud.testUser("jaja@ufl.edu", "12sdasd34562");
+        if (s == null) {
+            System.out.println("f");
+
+        }
+
     }*/
 /*    public static void main(String[] args) throws Exception {
         UserDao d = new UserDao();

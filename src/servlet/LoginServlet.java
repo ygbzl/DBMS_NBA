@@ -30,8 +30,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
         String passWord = request.getParameter("PassWord");
         HttpSession session = request.getSession();
         UserDao ud = new UserDao();
-        User user = new User();
-        user = ud.testUser(emailAddress, passWord);
+        User user = ud.testUser(emailAddress, passWord);
         session.setAttribute("user", user);
         if(user != null){
             session.setAttribute("msg", "UserName" + user.getUserName() + "Welcome");
